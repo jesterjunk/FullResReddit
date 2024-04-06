@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FullResReddit
-// @namespace    https://gist.github.com/jesterjunk/8f9e404d4a888c40448fd73321f469b4
-// @homepage     https://gist.github.com/jesterjunk
+// @namespace    https://github.com/jesterjunk
+// @homepage     https://github.com/jesterjunk/FullResReddit
 // @version      0
 // @description  reddit.com - dynamically convert preview image urls to original image urls
 // @author       a speck of dust on a tiny rock flying through a vast expanse of the universe
