@@ -14,7 +14,8 @@
 <hr></p>
 </div>
 
-<p>
-    <a href="https://ko-fi.com/jesterjunk" title="">https://ko-fi.com/jesterjunk</a><br>
-    <a href="https://www.buymeacoffee.com/jesterjunk" title="">https://www.buymeacoffee.com/jesterjunk</a><br>
-</p>
+<h3 align="center">
+    tip jar<br><br>
+    <a href="https://ko-fi.com/jesterjunk" title="https://ko-fi.com/jesterjunk">ko-fi</a><br><br>
+    <a href="https://www.buymeacoffee.com/jesterjunk" title="https://www.buymeacoffee.com/jesterjunk">buymeacoffee</a><br>
+</h3>
