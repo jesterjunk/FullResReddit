@@ -1,6 +1,8 @@
 # FullResReddit
 This userscript improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox, applies to new images as you browse, and ensures all images are upgraded even if loaded dynamically.
 
+https://jesterjunk.github.io/FullResReddit/tampermonkey_script_-_FullResReddit.js
+
 ```plaintext
 DISCLAIMER FOR THE "FullResReddit" TAMPERMONKEY SCRIPT
 
