@@ -1,8 +1,6 @@
-# FullResReddit
+<h1>FullResReddit</h1>
 
-This userscript improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox, applies to new images as you browse, and ensures all images are upgraded even if loaded dynamically.
-
-<br>
+<p>This userscript improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox, applies to new images as you browse, and ensures all images are upgraded even if loaded dynamically.<br></p>
 
 <div align="center">
 <p>
@@ -14,7 +12,7 @@ This userscript improves image quality on Reddit by automatically replacing prev
 </p>
 </div>
 
-```plaintext
+<pre>
 DISCLAIMER FOR THE "FullResReddit" TAMPERMONKEY SCRIPT
 
 This script is provided "as is," without warranty of any kind, express or
@@ -46,9 +44,9 @@ improvements are also welcome.
 
 By using this script, you acknowledge that you have read this disclaimer,
 agree to its terms, and understand that you are using the script at your own risk.
-```
+</pre>
 
-```plaintext
+<pre>
 Tested with Tampermonkey  v4.16.1  Chrome
             Tampermonkey  v5.1.0   Firefox
 
@@ -65,4 +63,4 @@ display in their original quality.
 
 https://ko-fi.com/jesterjunk
 https://www.buymeacoffee.com/jesterjunk
-```
+</pre>
