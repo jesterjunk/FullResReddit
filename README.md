@@ -1,6 +1,6 @@
-<h1>FullResReddit</h1>
+<div align="center"><img src="img/FullResReddit_logo_192x192.png"></div>
 
-<p>This userscript improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox, applies to new images as you browse, and ensures all images are upgraded even if loaded dynamically.<br></p>
+<p><br>This userscript improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox, applies to new images as you browse, and ensures all images are upgraded even if loaded dynamically.<br><br></p>
 
 <div align="center">
 <p>
