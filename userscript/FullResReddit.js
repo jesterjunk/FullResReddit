@@ -73,23 +73,73 @@
      */
     function preview_img_url_to_original_img_url(img) {
 
+        var original_image_url = ``;
+        var src_parts = ``;
+        var closest_a = ``;
+
         if (img.hasAttribute(`src`)) {
 
             if (img.src.includes(`//preview.redd.it`)) {
 
-                var original_image_url = img.src.split(`?`)[0].replace(`preview`, `i`);
+                original_image_url = img.src.split(`?`)[0].replace(`preview`, `i`);
 
                 img.setAttribute('loading', 'lazy');
                 img.src = original_image_url;
 
-                var closest_a = img.closest(`a`);
+                src_parts = img.src.split(`-`);
+
+                if (src_parts.length > 1) {
+                    original_image_url = `https://i.redd.it/` + src_parts[src_parts.length - 1];
+                    img.src = original_image_url;
+                }
+
+                closest_a = img.closest(`a`);
 
                 if (closest_a && closest_a.hasAttribute(`href`)) {
 
                     closest_a.href = original_image_url;
                 }
             }
+        }
 
+        if (img.hasAttribute(`data-lazy-src`)) {
+
+            if (img.getAttribute(`data-lazy-src`).includes(`//preview.redd.it`)) {
+
+                original_image_url = img.getAttribute(`data-lazy-src`).split(`?`)[0].replace(`preview`, `i`);
+
+                img.setAttribute('loading', 'lazy');
+                img.setAttribute(`data-lazy-src`, original_image_url);
+
+                src_parts = img.getAttribute(`data-lazy-src`).split(`-`);
+
+                if (src_parts.length > 1) {
+                    original_image_url = `https://i.redd.it/` + src_parts[src_parts.length - 1];
+                    img.setAttribute(`data-lazy-src`, original_image_url);
+                }
+
+                closest_a = img.closest(`a`);
+
+                if (closest_a && closest_a.hasAttribute(`href`)) {
+
+                    closest_a.href = original_image_url;
+                }
+            }
+        }
+
+        if (img.hasAttribute(`srcset`)) {
+
+            img.removeAttribute(`srcset`);
+        }
+
+        if (img.hasAttribute(`sizes`)) {
+
+            img.removeAttribute(`sizes`);
+        }
+
+        if (img.hasAttribute(`data-lazy-srcset`)) {
+
+            img.removeAttribute(`data-lazy-srcset`);
         }
 
     }
