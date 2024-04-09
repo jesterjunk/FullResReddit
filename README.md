@@ -8,8 +8,6 @@
 
 <strong>userscript URL</strong><br>
 <a href="https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.js" title="https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.js" target="_blank">https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.js</a><br><br>
-<strong>userscript minified URL</strong><br>
-<a href="https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.min.js" title="https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.min.js" target="_blank">https://jesterjunk.github.io/FullResReddit/userscript/FullResReddit.min.js</a><br><br>
 
 <strong>Instructions for installing a Tampermonkey userscript from a URL</strong><br>
 <a href="https://gist.github.com/jesterjunk/0344f1a7c1f67f52ffc716b17ee7f240" title="https://gist.github.com/jesterjunk/0344f1a7c1f67f52ffc716b17ee7f240" target="_blank">https://gist.github.com/jesterjunk/0344f1a7c1f67f52ffc716b17ee7f240</a>
