@@ -158,6 +158,11 @@
     }
 
     /**
+     * Decode address bar url and then overwrite it, this makes the url cleaner and shorter for when it is copied.
+     */
+    window.location.href = decodeURIComponent(window.location.href)
+
+    /**
      * Call processImages initially
      */
     processImages();
