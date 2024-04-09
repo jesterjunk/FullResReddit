@@ -64,134 +64,126 @@
     https://www.buymeacoffee.com/jesterjunk
 */
 
+
+// Initiates an IIFE (Immediately Invoked Function Expression) in strict mode for safer code execution.
 (function() {
     'use strict';
 
     /**
-     * Converts a preview image URL to its original image URL.
-     * @param {HTMLImageElement} img - The image element to process.
+     * Converts preview Reddit image URLs to their original, higher resolution versions.
+     * Operates on an `<img>` element by modifying its relevant attributes.
+     * @param {HTMLImageElement} img - The image element to be processed.
      */
-    function preview_img_url_to_original_img_url(img) {
+    function preview_image_url_to_original_image_url(img) {
 
-        var original_image_url = ``;
-        var src_parts = ``;
-        var closest_a = ``;
+        /**
+         * Processes an image attribute to replace its value with the original image URL.
+         * Modifies the image's attribute if it contains a preview Reddit URL.
+         * @param {string} attribute - The attribute of the image to process.
+         */
+        function processImage(attribute) {
 
-        if (img.hasAttribute(`src`)) {
+            // Return early if the image lacks the specified attribute or the attribute's value
+            // doesn't include a Reddit preview URL.
+            if (!img.hasAttribute(attribute)) return;
 
-            if (img.src.includes(`//preview.redd.it`)) {
+            let imageUrl = img.getAttribute(attribute);
+            if (!imageUrl.includes('//preview.redd.it')) return;
 
-                original_image_url = img.src.split(`?`)[0].replace(`preview`, `i`);
+            // Standardize the URL to point to the original image and update the attribute.
+            imageUrl = imageUrl.split('?')[0].replace('preview', 'i');
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute(attribute, imageUrl);
 
-                img.setAttribute('loading', 'lazy');
-                img.src = original_image_url;
+            // If the URL contains identifiable parts, reconstruct it to ensure it's the original.
+            let srcParts = imageUrl.split('-');
+            if (srcParts.length > 1) {
 
-                src_parts = img.src.split(`-`);
+                imageUrl = `https://i.redd.it/` + srcParts[srcParts.length - 1];
+                img.setAttribute(attribute, imageUrl);
+            }
 
-                if (src_parts.length > 1) {
-                    original_image_url = `https://i.redd.it/` + src_parts[src_parts.length - 1];
-                    img.src = original_image_url;
-                }
+            // Update the closest anchor (`<a>`) element's `href` attribute to the original image URL.
+            let closestA = img.closest('a');
+            if (closestA && closestA.hasAttribute('href')) {
 
-                closest_a = img.closest(`a`);
-
-                if (closest_a && closest_a.hasAttribute(`href`)) {
-
-                    closest_a.href = original_image_url;
-                }
+                closestA.href = imageUrl;
             }
         }
 
-        if (img.hasAttribute(`data-lazy-src`)) {
+        // Process `src` and `data-lazy-src` attributes via loop to accommodate various loading strategies.
+        ['src', 'data-lazy-src'].forEach(attr => {
 
-            if (img.getAttribute(`data-lazy-src`).includes(`//preview.redd.it`)) {
+            processImage(attr);
+        });
 
-                original_image_url = img.getAttribute(`data-lazy-src`).split(`?`)[0].replace(`preview`, `i`);
 
-                img.setAttribute('loading', 'lazy');
-                img.setAttribute(`data-lazy-src`, original_image_url);
+        // Clean up by removing attributes that are no longer needed after the URL update.
+        ['srcset', 'sizes', 'data-lazy-srcset'].forEach(attr => {
 
-                src_parts = img.getAttribute(`data-lazy-src`).split(`-`);
-
-                if (src_parts.length > 1) {
-                    original_image_url = `https://i.redd.it/` + src_parts[src_parts.length - 1];
-                    img.setAttribute(`data-lazy-src`, original_image_url);
-                }
-
-                closest_a = img.closest(`a`);
-
-                if (closest_a && closest_a.hasAttribute(`href`)) {
-
-                    closest_a.href = original_image_url;
-                }
+            if (img.hasAttribute(attr)) {
+                img.removeAttribute(attr);
             }
-        }
-
-        if (img.hasAttribute(`srcset`)) {
-
-            img.removeAttribute(`srcset`);
-        }
-
-        if (img.hasAttribute(`sizes`)) {
-
-            img.removeAttribute(`sizes`);
-        }
-
-        if (img.hasAttribute(`data-lazy-srcset`)) {
-
-            img.removeAttribute(`data-lazy-srcset`);
-        }
-
-    }
-
-    /**
-     * Processes all images on the page, converting preview URLs to original URLs.
-     */
-    function processImages() {
-
-        var imageElements = document.querySelectorAll(`img`);
-
-        imageElements.forEach(img => {
-
-            preview_img_url_to_original_img_url(img);
         });
     }
 
-    /**
-     * Decode address bar url and then overwrite it, this makes the url cleaner and shorter for when it is copied.
-     */
-    window.location.href = decodeURIComponent(window.location.href)
 
     /**
-     * Call processImages initially
+     * Processes all `<img>` elements on the page to update preview URLs to original URLs.
      */
+    function processImages(node = document) {
+
+        node.querySelectorAll('img').forEach(img => preview_image_url_to_original_image_url(img));
+    }
+
+    /**
+     * Cleans up the address bar URL by decoding it for improved readability and brevity.
+     */
+    window.location.href = decodeURIComponent(window.location.href);
+
+
+    // Initially process all images.
     processImages();
 
     /**
-     * Sets up a MutationObserver to watch for new images and process them.
+     * Observes document body for newly added images to process their URLs.
      */
-    var observer = new MutationObserver(function(mutations) {
+    let observer = new MutationObserver(function(mutations) {
+
         mutations.forEach(function(mutation) {
+
             if (mutation.addedNodes) {
+
                 mutation.addedNodes.forEach(function(node) {
-                    if (node.nodeType === 1 && node.tagName === 'IMG') {
-                        preview_img_url_to_original_img_url(node);
-                    }
+
+                    processImages(node);
                 });
             }
         });
     });
 
+
     observer.observe(document.body, { childList: true, subtree: true });
 
     /**
-     * Polling mechanism to detect URL changes and process images accordingly.
+     * Periodically checks for URL changes to reprocess images, ensuring up-to-date URLs.
      */
     let lastHref = window.location.href;
+    let tick_count = 0;
+
     setInterval(function() {
+
         if (window.location.href !== lastHref) {
+
             lastHref = window.location.href;
             processImages();
+        }
+
+        if (tick_count === 0) {
+
+            processImages();
+
+            tick_count += 1;
         }
     }, 1000); // Check every second
 
