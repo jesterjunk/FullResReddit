@@ -69,12 +69,14 @@
 (function() {
     'use strict';
 
+
     /**
      * Converts preview Reddit image URLs to their original, higher resolution versions.
      * Operates on an `<img>` element by modifying its relevant attributes.
      * @param {HTMLImageElement} img - The image element to be processed.
      */
     function preview_image_url_to_original_image_url(img) {
+
 
         /**
          * Processes an image attribute to replace its value with the original image URL.
@@ -86,14 +88,15 @@
             // Return early if the image lacks the specified attribute or the attribute's value
             // doesn't include a Reddit preview URL.
             if (!img.hasAttribute(attribute)) return;
-
             let imageUrl = img.getAttribute(attribute);
             if (!imageUrl.includes('//preview.redd.it')) return;
+
 
             // Standardize the URL to point to the original image and update the attribute.
             imageUrl = imageUrl.split('?')[0].replace('preview', 'i');
             img.setAttribute('loading', 'lazy');
             img.setAttribute(attribute, imageUrl);
+
 
             // If the URL contains identifiable parts, reconstruct it to ensure it's the original.
             let srcParts = imageUrl.split('-');
@@ -103,6 +106,7 @@
                 img.setAttribute(attribute, imageUrl);
             }
 
+
             // Update the closest anchor (`<a>`) element's `href` attribute to the original image URL.
             let closestA = img.closest('a');
             if (closestA && closestA.hasAttribute('href')) {
@@ -110,6 +114,7 @@
                 closestA.href = imageUrl;
             }
         }
+
 
         // Process `src` and `data-lazy-src` attributes via loop to accommodate various loading strategies.
         ['src', 'data-lazy-src'].forEach(attr => {
@@ -133,8 +138,16 @@
      */
     function processImages(node = document) {
 
+        // Ensure the context supports querySelectorAll
+        if (!node.querySelectorAll) {
+
+            // Fallback to the document if the node does not support querySelectorAll
+            node = document;
+        }
+
         node.querySelectorAll('img').forEach(img => preview_image_url_to_original_image_url(img));
     }
+
 
     /**
      * Cleans up the address bar URL by decoding it for improved readability and brevity.
@@ -142,8 +155,11 @@
     window.location.href = decodeURIComponent(window.location.href);
 
 
-    // Initially process all images.
+    /**
+     * Initially process all images.
+     */
     processImages();
+
 
     /**
      * Observes document body for newly added images to process their URLs.
@@ -164,6 +180,7 @@
 
 
     observer.observe(document.body, { childList: true, subtree: true });
+
 
     /**
      * Periodically checks for URL changes to reprocess images, ensuring up-to-date URLs.
