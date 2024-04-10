@@ -8,6 +8,9 @@
 // @match        https://old.reddit.com/*
 // @match        https://www.reddit.com/*
 // @match        https://new.reddit.com/*
+// @exclude      https://old.reddit.com/r/*/submit
+// @exclude      https://www.reddit.com/r/*/submit
+// @exclude      https://new.reddit.com/r/*/submit
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
 // @grant        none
 // ==/UserScript==
