@@ -11,6 +11,9 @@
 // @exclude      https://old.reddit.com/r/*/submit
 // @exclude      https://www.reddit.com/r/*/submit
 // @exclude      https://new.reddit.com/r/*/submit
+// @exclude      https://old.reddit.com/*.json
+// @exclude      https://www.reddit.com/*.json
+// @exclude      https://new.reddit.com/*.json
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
 // @grant        none
 // ==/UserScript==
