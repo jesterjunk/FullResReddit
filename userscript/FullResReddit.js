@@ -14,6 +14,9 @@
 // @exclude      https://old.reddit.com/*.json
 // @exclude      https://www.reddit.com/*.json
 // @exclude      https://new.reddit.com/*.json
+// @exclude      https://www.reddit.com/login/
+// @exclude      https://www.reddit.com/login/
+// @exclude      https://www.reddit.com/login/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
 // @grant        none
 // ==/UserScript==
@@ -53,7 +56,6 @@
 
 
     Tested with Tampermonkey  v4.16.1  Chrome
-                Tampermonkey  v5.1.0   Firefox
 
     This Tampermonkey script dynamically updates image URLs on reddit.com,
     converting preview image URLs to their original, full-resolution versions.
