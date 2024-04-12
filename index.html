@@ -86,7 +86,6 @@
 
 <pre>
 Tested with Tampermonkey  v4.16.1  Chrome
-            Tampermonkey  v5.1.0   Firefox
 
 This Tampermonkey script dynamically updates image URLs on reddit.com, converting preview image URLs to their original, full-resolution versions. It's designed to work automatically on page load and adjusts for new images that load dynamically or upon navigation within the site. The script supports both Chrome and Firefox via Tampermonkey and operates by identifying image elements with preview URLs, replacing these with their original counterparts. Additionally, it sets up a MutationObserver to handle new images added to the DOM and implements a polling mechanism to detect URL changes, ensuring that all images, regardless of how or when they are loaded, are processed to display in their original quality.
 </pre>
