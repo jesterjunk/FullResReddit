@@ -153,60 +153,34 @@
             node = document;
         }
 
-        /**
-         * Iterates over all elements within a node, finds images, and updates their URLs.
-         * If an element has a shadow root, it searches for an image within the shadow root.
-         * Otherwise, it searches for an image directly within the element.
-         * If an image is found, its URL is updated to its original URL.
-         * If the image is within an anchor tag, the anchor's href is updated to the image's src.
-         *
-         * @param {Node} node - The node to search for images within.
-         */
-        node.querySelectorAll('*').forEach(elm => {
-
-            /**
-             * @type {HTMLImageElement|null}
-             */
-            let img;
+        node.querySelectorAll(`*`).forEach(elm => {
 
             if (elm.shadowRoot) {
 
-                /**
-                 * Searches for an image within the shadow root of the element.
-                 */
-                img = elm.shadowRoot.querySelector('img');
+                let img = elm.shadowRoot.querySelector(`img`)
+
+                if (img) {
+
+                    preview_image_url_to_original_image_url(img);
+
+                    if (elm.closest('a')) {
+
+                        elm.closest('a').href = img.src;
+                    }
+                }
             }
             else {
+                let img_array = elm.getElementsByTagName('img');
 
-                /**
-                 * Searches for an image directly within the element.
-                 */
-                img = elm.querySelector('img');
+                if (img_array) {
+
+                    for(var i = 0, length1 = img_array.length; i < length1; i++){
+
+                        preview_image_url_to_original_image_url(img_array[i])
+                    }
+                }
             }
-
-            if (!img) return; // Early return if no img found
-
-            /**
-             * Updates the image's URL to its original URL.
-             * @param {HTMLImageElement} img - The image element to update.
-             */
-            preview_image_url_to_original_image_url(img);
-
-            /**
-             * Finds the closest anchor tag to the image.
-             * @type {HTMLAnchorElement|null}
-             */
-            const anchor = elm.closest('a');
-
-            if (anchor) {
-
-                /**
-                 * Updates the anchor's href to the image's src.
-                 */
-                anchor.href = img.src;
-            }
-        });
-
+        })
     }
 
 
