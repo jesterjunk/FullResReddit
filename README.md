@@ -1,6 +1,6 @@
 <div align="center"><img src="img/FullResReddit_logo_192x192.png"></div>
 
-<p><br>FullResReddit is a userscript that improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and Firefox and supports dynamically loaded images with lazy loading.</p>
+<p><br>FullResReddit is a userscript that improves image quality on Reddit by automatically replacing preview images with full-resolution versions. It works on Chrome and supports dynamically loaded images with lazy loading.</p>
 
 <div align="center">
 <p><hr><strong>web page for this userscript</strong><br>
